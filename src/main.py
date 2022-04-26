@@ -2,11 +2,11 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from homie_helpers import MqttSettings
 
 from Gios import Gios
-from bootstrap import start_service
+from bootstrap.bootstrap import start_service
 
-config, logger = start_service()
+config, logger, timezone = start_service()
 
-scheduler = BlockingScheduler(timezone=config['timezone'])
+scheduler = BlockingScheduler(timezone=timezone)
 
 device = Gios(config=config['gios'], mqtt_settings=MqttSettings.from_dict(config['mqtt']))
 
